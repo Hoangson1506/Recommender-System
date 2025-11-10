@@ -16,7 +16,7 @@ model = ALSModel.load(model_path)
 user_recs = model.recommendForAllUsers(5)
 
 # Save results
-output_path = "hdfs://namenode:9000/recommendation/batch_top3"
+output_path = "hdfs://namenode:9000/recommendations/batch_top3"
 user_recs.write.mode("overwrite").parquet(output_path)
 
 print(f"User recommendations saved to {output_path}")
