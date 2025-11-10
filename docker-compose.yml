@@ -94,7 +94,7 @@ services:
       - hadoop-net
 
   pyspark:
-    image: jupyter/pyspark-notebook:spark-3.2.1
+    build: ./docker/pyspark_notebook
     container_name: pyspark-notebook
     ports:
       - "8888:8888"
@@ -105,6 +105,18 @@ services:
       - hadoop-net
     environment:
       - SPARK_MASTER=spark://spark-master:7077
+  streamlit:
+    build: 
+      context: ./docker/streamlit
+    container_name: streamlit-app
+    volumes:
+      - ./app/:/home/jovyan/work/
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    ports:
+      - "8501:8501"
+    networks:
+      - hadoop-net
 
 volumes:
   hadoop_namenode:
