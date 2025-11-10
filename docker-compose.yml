@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   namenode:
     build: ./docker/namenode
@@ -101,9 +99,12 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./notebook/:/home/jovyan/work/
+      - ./notebook/:/home/jovyan/work/notebook
+      - ./spark/:/home/jovyan/work/spark
     networks:
       - hadoop-net
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
 
 volumes:
   hadoop_namenode:
