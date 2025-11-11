@@ -33,6 +33,8 @@ docker exec -it namenode hdfs dfs -mkdir /data
 
 # 3. Put the data from the container's temp folder into HDFS
 docker exec -it namenode hdfs dfs -put /tmp/data/* /data
+# if error encountered, use this instead:
+docker exec -it namenode bash -c "hdfs dfs -put /tmp/data/* /data/"
 ```
 
 You can (optionally) verify the data was loaded correctly by listing the contents of the HDFS directory:
@@ -52,7 +54,7 @@ All jobs are run by executing `spark-submit` commands inside the `pyspark-notebo
 This command executes the training script. The resulting models will be saved to HDFS.
 
 ```bash
-docker exec -it pyspark-notebook bash -c "cd /work && spark-submit batch_train.py"
+docker exec -it pyspark-notebook bash -c "cd work/spark && spark-submit batch_train.py"
 ```
 
   * **Model Output:** Models are saved to `hdfs://namenode:9000/models`
@@ -62,7 +64,7 @@ docker exec -it pyspark-notebook bash -c "cd /work && spark-submit batch_train.p
 This command uses the trained models to generate recommendations for users.
 
 ```bash
-docker exec -it pyspark-notebook bash -c "cd /work && spark-submit batch_recommend.py"
+docker exec -it pyspark-notebook bash -c "cd work/spark && spark-submit batch_recommend.py"
 ```
 
   * **Recommendation Output:** Recommendations are saved to `hdfs://namenode:9000/recommendations`
