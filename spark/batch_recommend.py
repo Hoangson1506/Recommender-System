@@ -5,9 +5,6 @@ import os
 spark = SparkSession.builder \
     .appName("MovieRecommender") \
     .master(os.environ.get("SPARK_MASTER", "local[*]")) \
-    .config("spark.dynamicAllocation.enabled", "true") \
-    .config("spark.dynamicAllocation.minExecutors", "0") \
-    .config("spark.dynamicAllocation.maxExecutors", "12") \
     .getOrCreate()
 
 # HDFS path to the model

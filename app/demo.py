@@ -10,13 +10,10 @@ spark = SparkSession.builder \
     .master(os.environ.get("SPARK_MASTER", "local[*]")) \
     .config("spark.executor.memory", "4g") \
     .config("spark.driver.memory", "4g") \
-    .config("spark.dynamicAllocation.enabled", "true") \
-    .config("spark.dynamicAllocation.minExecutors", "2") \
-    .config("spark.dynamicAllocation.maxExecutors", "12") \
     .getOrCreate()
 
 
-RECOMMENDATION_PATH = "hdfs://namenode:9000/recommendation/batch_top3"
+RECOMMENDATION_PATH = "hdfs://namenode:9000/recommendations/batch_top3"
 
 @st.cache_data(show_spinner=False)
 def load_recommendations():

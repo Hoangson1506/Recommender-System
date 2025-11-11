@@ -8,9 +8,6 @@ spark = SparkSession.builder \
     .master(os.environ.get("SPARK_MASTER", "local[*]")) \
     .config("spark.executor.memory", "6g") \
     .config("spark.driver.memory", "6g") \
-    .config("spark.dynamicAllocation.enabled", "true") \
-    .config("spark.dynamicAllocation.minExecutors", "0") \
-    .config("spark.dynamicAllocation.maxExecutors", "12") \
     .getOrCreate()
 
 
