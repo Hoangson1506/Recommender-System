@@ -101,6 +101,8 @@ services:
     volumes:
       - ./notebook/:/home/jovyan/work/notebook
       - ./spark/:/home/jovyan/work/spark
+      - ./data/:/home/jovyan/work/data
+      - ./kafka/:/home/jovyan/work/kafka
     networks:
       - hadoop-net
     environment:
