@@ -75,10 +75,10 @@ These command will run a simulation of data streaming. producer.py makes synthes
 
 ```bash
 # 1. Run this in a new terminal. This will make stream_ingest.py start working and wait for data from producer
-docker exec pyspark spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1 /home/jovyan/work/kafka/stream_ingest.py   
+docker-compose exec pyspark spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1 /home/jovyan/work/kafka/stream_ingest.py   
 
 # 2. Run this in another new terminal. This will make producer.py start working.
-docker exec pyspark python /home/jovyan/work/kafka/producer.py
+docker-compose exec pyspark python /home/jovyan/work/kafka/producer.py
 ```
 
 You can check if the system is working correctly by listing the contents in HDFS:
