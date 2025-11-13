@@ -93,9 +93,9 @@ services:
     networks:
       - hadoop-net
 
-  pyspark:
-    build: ./docker/pyspark_notebook
-    container_name: pyspark-notebook
+  bigdata:
+    build: ./docker/bigdata
+    container_name: bigdata-stack
     ports:
       - "8888:8888"
     volumes:
@@ -107,18 +107,6 @@ services:
       - hadoop-net
     environment:
       - SPARK_MASTER=spark://spark-master:7077
-  streamlit:
-    build: 
-      context: ./docker/streamlit
-    container_name: streamlit-app
-    volumes:
-      - ./app/:/home/jovyan/work/
-    environment:
-      - SPARK_MASTER=spark://spark-master:7077
-    ports:
-      - "8501:8501"
-    networks:
-      - hadoop-net
   
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.3

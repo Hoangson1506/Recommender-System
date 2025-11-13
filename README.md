@@ -47,14 +47,14 @@ docker exec -it namenode hdfs dfs -ls /data
 
 ## 🛠️ User Guide: Running Jobs
 
-All jobs are run by executing `spark-submit` commands inside the `pyspark-notebook` container.
+All jobs are run by executing `spark-submit` commands inside the `bigdata-stack` container.
 
 ### 1\. Run Batch Training
 
 This command executes the training script. The resulting models will be saved to HDFS.
 
 ```bash
-docker exec -it pyspark-notebook bash -c "cd work/spark && spark-submit batch_train.py"
+docker exec -it bigdata-stack bash -c "cd work/spark && spark-submit batch_train.py"
 ```
 
   * **Model Output:** Models are saved to `hdfs://namenode:9000/models`
@@ -64,21 +64,29 @@ docker exec -it pyspark-notebook bash -c "cd work/spark && spark-submit batch_tr
 This command uses the trained models to generate recommendations for users.
 
 ```bash
-docker exec -it pyspark-notebook bash -c "cd work/spark && spark-submit batch_recommend.py"
+docker exec -it bigdata-stack bash -c "cd work/spark && spark-submit batch_recommend.py"
 ```
 
   * **Recommendation Output:** Recommendations are saved to `hdfs://namenode:9000/recommendations`
 
-### 3\. Run kafka streaming simulations
+### 3\. Prepare the data for streaming
+
+This command will prepare the data for the streaming process.
+
+```bash
+docker exec -it bigdata-stack bash -c "cd work/spark && spark-submit prepare_data.py"
+```
+
+### 4\. Run kafka streaming simulations
 
 These command will run a simulation of data streaming. producer.py makes synthesis user rating data and stream_ingest.py reads it then write to data/realtime_ratings in the hdfs.
 
 ```bash
 # 1. Run this in a new terminal. This will make stream_ingest.py start working and wait for data from producer
-docker-compose exec pyspark spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1 /home/jovyan/work/kafka/stream_ingest.py   
+docker exec bigdata-stack spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1 /home/jovyan/work/kafka/stream_ingest.py   
 
 # 2. Run this in another new terminal. This will make producer.py start working.
-docker-compose exec pyspark python /home/jovyan/work/kafka/producer.py
+docker exec bigdata-stack python /home/jovyan/work/kafka/producer.py
 ```
 
 You can check if the system is working correctly by listing the contents in HDFS:
@@ -93,3 +101,11 @@ docker exec namenode hdfs dfs -ls /data/realtime_ratings
 
   * **Spark Master:** When configuring your PySpark application, the Spark Master is available at the address specified in the `SPARK_MASTER` environment variable (within the container).
   * **HDFS Connection:** To access HDFS from Spark, use the following URL: `hdfs://namenode:9000/`
+
+## Links you can access to manage the process
+http://localhost:8080: Spark Master UI
+
+```bash
+# Run this command and find 127.0.0.1:8888/token=... to access Jupyter notebook demo at work/notebook/demo.ipynb
+docker logs bigdata-stack
+```

@@ -1,2 +1,15 @@
+# Ignore local data files
 data/
+
+# Ignore environment variables / secrets
 *.env
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Optional: Python cache / compiled files
+__pycache__/
+
+# Optional: virtual environment folder
+venv/
+env/
