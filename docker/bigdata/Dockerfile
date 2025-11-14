@@ -7,7 +7,14 @@ RUN apt-get update && apt-get remove -y openjdk-* && apt-get autoremove -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN conda install -y mamba -n base -c conda-forge && \
-    mamba create -y -n py37 python=3.7 ipykernel matplotlib pandas pyspark==3.2.1 kafka-python redis-py -c conda-forge && \
+    mamba create -y -n py37 python=3.7 ipykernel matplotlib pandas \
+        pyspark==3.2.1 \
+        kafka-python \
+        redis-py==4.5.5 \
+        fastapi \
+        "uvicorn[standard]" \
+        pydantic \
+        -c conda-forge && \
     conda clean -afy
 
 RUN su - jovyan -c "/opt/conda/envs/py37/bin/python -m ipykernel install --user \

@@ -95,6 +95,28 @@ You can check if the system is working correctly by listing the contents in HDFS
 docker exec namenode hdfs dfs -ls /data/realtime_ratings
 ```
 
+### 5\. Test rating and recommendation like an user
+
+This part demo how the system works when interacting with real user instead of using a fake script. Here, we have a simple FastAPI app with 2 functions: user_rate() and recommend(). To test this out, do the following steps:
+
+```bash
+# 1. Run this in a new terminal. This will make redis_consumer.py start working and wait for data from producer. It will get all movies rated from users and write to a cache so that when recommending movies we can mask those rated movies of an user out.
+docker exec -it bigdata-stack python /home/jovyan/work/kafka/redis_consumer.py
+```
+
+You can also run stream_ingest.py here, so that you have the whole system running with a consumer that writes to cache and one to HDFS (which is used to later train the model)
+
+```bash
+# 2. Run this in another new terminal. This will start the FastAPI app.
+docker exec -it bigdata-stack bash
+source /opt/conda/etc/profile.d/conda.sh
+conda activate py37
+cd /home/jovyan/work/api
+uvicorn main:app --host 0.0.0.0 --port 5001 --reload
+```
+
+You can then go to http://127.0.0.1:5001/docs to try out the apis
+
 -----
 
 ## ⚙️ Configuration Notes

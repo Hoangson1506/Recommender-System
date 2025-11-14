@@ -98,11 +98,13 @@ services:
     container_name: bigdata-stack
     ports:
       - "8888:8888"
+      - "5001:5001"
     volumes:
       - ./notebook/:/home/jovyan/work/notebook
       - ./spark/:/home/jovyan/work/spark
       - ./data/:/home/jovyan/work/data
       - ./kafka/:/home/jovyan/work/kafka
+      - ./api/:/home/jovyan/work/api
     networks:
       - hadoop-net
     environment:
