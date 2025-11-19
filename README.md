@@ -22,7 +22,7 @@ docker compose up -d
 
 ### 2\. Use crawl_data.ipynb to crawl data
 
-Tp have the data, you will need to crawl it from https://www.momo.vn/cinema. Just go to the folder /data and run the crawl_data.ipynb file. Note that you will need to have Chrome and Selenium, and running the full code can take up to 20 hours. So if you only want to test things out, I recommend changing the code to crawl on 10 or 20 first URLs. Details in the file.
+To have the data, you will need to crawl it from https://www.momo.vn/cinema. Just go to the folder /data and run the crawl_data.ipynb file. Note that you will need to have Chrome and Selenium, and running the full code can take up to 20 hours. So if you only want to test things out, I recommend changing the code to crawl on 10 or 20 first URLs. Details in the file.
 
 ### 3\. Load Data into HDFS
 
