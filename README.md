@@ -12,7 +12,7 @@ Before you can use this repo, ensure you have the following installed on your sy
 
 ## 🚀 Getting Started: Installation & Data Setup
 
-### 1. Start the Docker Environment
+### 1\. Start the Docker Environment
 
 This command will build and start all the necessary services (Namenode, Datanode, Spark Master, PySpark Notebook) in detached mode.
 
@@ -20,7 +20,11 @@ This command will build and start all the necessary services (Namenode, Datanode
 docker compose up -d
 ````
 
-### 2\. Load Data into HDFS
+### 2\. Use crawl_data.ipynb to crawl data
+
+Tp have the data, you will need to crawl it from https://www.momo.vn/cinema. Just go to the folder /data and run the crawl_data.ipynb file. Note that you will need to have Chrome and Selenium, and running the full code can take up to 20 hours. So if you only want to test things out, I recommend changing the code to crawl on 10 or 20 first URLs. Details in the file.
+
+### 3\. Load Data into HDFS
 
 These commands will copy local data into the `namenode` container and then move it into HDFS.
 
@@ -112,7 +116,7 @@ docker exec -it bigdata-stack bash
 source /opt/conda/etc/profile.d/conda.sh
 conda activate py37
 cd /home/jovyan/work/api
-uvicorn main:app --host 0.0.0.0 --port 5001 --reload
+uvicorn api:app --host 0.0.0.0 --port 5001 --reload
 ```
 
 You can then go to http://127.0.0.1:5001/docs to try out the apis

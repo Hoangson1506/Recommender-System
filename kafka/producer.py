@@ -14,7 +14,7 @@ DATA_PATH = 'work/data/'
 
 userIds = np.load(DATA_PATH + 'userIds.npy', allow_pickle=True)
 movieIds = np.load(DATA_PATH + 'movieIds.npy', allow_pickle=True)
-ratings = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
+ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 def get_random_user(userIds):
     return np.random.choice(userIds)

@@ -1,5 +1,8 @@
 # Ignore local data files
-data/
+data/*
+
+# Un-ignore data crawl file
+!data/*.ipynb
 
 # Ignore environment variables / secrets
 *.env
