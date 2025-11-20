@@ -13,10 +13,10 @@ model_path = "hdfs://namenode:9000/models/movie_als_v1"
 # Load model
 model = ALSModel.load(model_path)
 
-user_recs = model.recommendForAllUsers(5)
+user_recs = model.recommendForAllUsers(10)
 
 # Save results
-output_path = "hdfs://namenode:9000/recommendations/batch_top5"
+output_path = "hdfs://namenode:9000/recommendations/batch_top10"
 user_recs.write.mode("overwrite").parquet(output_path)
 
 print(f"User recommendations saved to {output_path}")

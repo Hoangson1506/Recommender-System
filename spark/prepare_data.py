@@ -11,7 +11,7 @@ spark = SparkSession.builder \
     .config("spark.driver.memory", "4g") \
     .getOrCreate()
 
-RECOMMENDATIONS_PATH = "hdfs://namenode:9000/recommendations/batch_top5"
+RECOMMENDATIONS_PATH = "hdfs://namenode:9000/recommendations/batch_top10"
 
 USER_IDS_PATH = "/home/jovyan/work/data/userIds.npy"
 MOVIE_IDS_PATH = "/home/jovyan/work/data/movieIds.npy"

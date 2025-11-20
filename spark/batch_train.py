@@ -22,7 +22,7 @@ train, test = ratings.randomSplit([0.8, 0.2], seed=42)
 
 als = ALS(
     userCol="user_id", itemCol="movie_id", ratingCol="rating",
-    rank=20, maxIter=10, regParam=0.1, coldStartStrategy="drop"
+    rank=30, maxIter=20, regParam=0.1, coldStartStrategy="drop"
 )
 
 model = als.fit(train)
