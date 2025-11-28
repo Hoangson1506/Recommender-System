@@ -28,10 +28,10 @@ def get_random_rating(ratings):
 try:
     while True:
         event = {
-            'userId': int(get_random_user(userIds)),
+            'user_id': int(get_random_user(userIds)),
             'movieId': int(get_random_movie(movieIds)),
             'rating': get_random_rating(ratings),
-            'timestamp': datetime.now().isoformat()
+            'date': datetime.now().date().isoformat()
         }
 
         producer.send('user_events', event)
