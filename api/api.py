@@ -14,7 +14,7 @@ import json
 os.environ['PYSPARK_PYTHON'] = '/usr/local/bin/python'
 os.environ['PYSPARK_DRIVER_PYTHON'] = '/usr/local/bin/python'
 
-RECOMMENDATION_PATH = "hdfs://namenode:9000/recommendations/batch_top5"
+RECOMMENDATION_PATH = "hdfs://namenode:9000/recommendations/batch_top10"
 
 app = FastAPI(title="Movie Recommendation API")
 
